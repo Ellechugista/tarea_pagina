@@ -650,3 +650,18 @@ footer h1{
     color: #838383;
     text-align: center;
 }
+
+/*media queryss*/
+@media screen and (max-width: 400px){
+    footer article{
+        height: auto;
+        flex-direction: column;
+        width: 100%;
+    }
+    footer{
+        height: auto;
+    }
+    footer article #contactos, #seb_menu{
+        width: 100%;
+    }
+}
