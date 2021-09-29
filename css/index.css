@@ -156,6 +156,7 @@ header nav a:hover{
     header nav a{
         padding-left: 10px;
         padding-right: 10px;
+        font-size: 110%;
     }
 }
 
