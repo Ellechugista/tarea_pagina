@@ -351,6 +351,7 @@ header nav a:hover{
 }
 
 #trift #container #barras .barreta{
+    color:white;
     background-image: linear-gradient(120deg, #ffc811 0%, #ff9f84 100%);
 }
 
