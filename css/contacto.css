@@ -11,6 +11,7 @@ html{
 
 body{
     background: radial-gradient(circle, rgba(83,255,82,0.700717787114846) 0%, rgba(2,255,0,0.7) 66%, rgba(1,91,0,0.7) 100%), url(../img/contacto/montañas.png);
+    background-size: cover;
     font-family:  'Roboto Condensed', sans-serif;
 }
 
@@ -46,8 +47,8 @@ a {
     margin-top: 15vh;
     box-shadow: 0 10px 15px 10px rgba(0,0,0,44%);
     backdrop-filter: blur(4px);
-    width: 30%;
-    max-width: 400px;
+    width: 40%;
+    max-width: 600px;
     height: auto;
     min-height: 200px;
     padding: 20px;
@@ -121,4 +122,19 @@ a {
     border-radius: 5px;
     border: none;
     margin-top: 20px;
+}
+
+/*media querys*/
+@media screen and (max-width: 1050px) {
+    #firts form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    #firts form{
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
