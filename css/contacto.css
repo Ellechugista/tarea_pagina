@@ -10,7 +10,7 @@ html{
 }
 
 body{
-    background: linear-gradient(120deg, rgba(250, 192, 0, 0.548) 0%, rgba(253, 159, 133, 0.527) 100%), url(../img/contacto/montañas.png);
+    background: radial-gradient(circle, rgba(83,255,82,0.700717787114846) 0%, rgba(2,255,0,0.7) 66%, rgba(1,91,0,0.7) 100%), url(../img/contacto/montañas.png);
     font-family:  'Roboto Condensed', sans-serif;
 }
 
@@ -37,13 +37,15 @@ a {
 
 #firts{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 #firts form{
-    margin-top: 30vh;
-    background:rgba(0, 0, 0, 35%);
+    margin-top: 15vh;
+    box-shadow: 0 10px 15px 10px rgba(0,0,0,45%);
+    backdrop-filter: blur(4px);
     width: 30%;
     max-width: 400px;
     height: auto;
@@ -57,9 +59,32 @@ a {
 
 }
 
+#firts form a{
+    *background: chartreuse;
+    width: 30%;
+    height: 20px;
+    text-align: center;
+    margin-top: 15px;
+    padding: 5px;
+    font-size: 110%;
+    font-weight: 500;
+    border-radius: 15px;
+    transition: 0.4s;
+    color: rgb(255, 255, 255);
+}
+
+#firts form a:hover{
+    font-size: 120%;
+    box-shadow: 0 5px 10px 5px rgba(0,0,0,25%);
+    *background: rgba(0,0,0,25%);
+    color: black;
+}
+
 #firts form h2{
-    font-size: 180%;
+    font-size: 280%;
+    font-family: 'Arial Narrow Bold', sans-serif;
     margin-bottom: 20px;
+    color: white;
 }
 
 .input_espase{
@@ -88,10 +113,12 @@ a {
 
 #boton{
     font-size: 120%;
-    width: 100%;
-    background: blue;
+    width: 80%;
+    background: linear-gradient(to right, #0026ff 0%, #2af4ff 100%);
     padding: 5px;
     color: white;
     font-weight: 700;
     border-radius: 5px;
+    border: none;
+    margin-top: 20px;
 }
