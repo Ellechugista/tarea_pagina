@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategia AIDA - InfoPlanet JP</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .slide {
+            padding: 40px;
+            display: none;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            color: var(--dark);
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .content {
+            margin-bottom: 30px;
+        }
+        
+        .content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .content p, .content ul {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .aida-model {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        .aida-step {
+            text-align: center;
+            flex: 1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 0 10px;
+            background: var(--light);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .aida-step.attention { border-top: 5px solid #ef4444; }
+        .aida-step.interest { border-top: 5px solid #f59e0b; }
+        .aida-step.desire { border-top: 5px solid #10b981; }
+        .aida-step.action { border-top: 5px solid #3b82f6; }
+        
+        .aida-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .aida-step p {
+            font-size: 1rem;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .target-audience {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .strategy-card {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .aida-model {
+                flex-direction: column;
+            }
+            
+            .aida-step {
+                margin: 10px 0;
+            }
+            
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <!-- Slide 1: Portada -->
+        <div class="slide active" id="slide1">
+            <div class="header">
+                <h1>InfoPlanet JP</h1>
+                <h2>Estrategia Digital con Modelo AIDA</h2>
+            </div>
+            <div class="content">
+                <p>Presentación de la estrategia de marketing digital para el lanzamiento del sistema de gestión con IA para PYMES</p>
+            </div>
+            <div class="navigation">
+                <div></div>
+                <button class="btn" onclick="nextSlide()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Objetivo -->
+        <div class="slide" id="slide2">
+            <div class="header">
+                <h2>Objetivo de la Estrategia</h2>
+            </div>
+            <div class="content">
+                <p>Implementar una estrategia digital efectiva para captar, interesar y convertir dueños de PYMES en clientes de InfoPlanet JP, utilizando el modelo AIDA.</p>
+                
+                <div class="target-audience">
+                    <h3>Público Objetivo</h3>
+                    <ul>
+                        <li>Dueños de negocios, gerentes generales, administradores</li>
+                        <li>Edad: 30-55 años</li>
+                        <li>Nivel socioeconómico: Medio-alto</li>
+                        <li>Intereses: Optimización de procesos, reducción de costos, eficiencia operativa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="prevSlide()">Anterior</button>
+                <button class="btn" onclick="nextSlide()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Modelo AIDA -->
+        <div class="slide" id="slide3">
+            <div class="header">
+                <h2>Modelo AIDA</h2>
+            </div>
+            <div class="content">
+                <p>El modelo AIDA describe las etapas que un cliente potencial recorre antes de realizar una compra:</p>
+                
+                <div class="aida-model">
+                    <div class="aida-step attention">
+                        <h3>Atención</h3>
+                        <p>Captar la atención del público objetivo</p>
+                    </div>
+                    <div class="aida-step interest">
+                        <h3>Interés</h3>
+                        <p>Generar interés en la solución</p>
+                    </div>
+                    <div class="aida-step desire">
+                        <h3>Deseo</h3>
+                        <p>Crear deseo por el producto/servicio</p>
+                    </div>
+                    <div class="aida-step action">
+                        <h3>Acción</h3>
+                        <p>Llevar a la acción concreta</p>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="prevSlide()">Anterior</button>
+                <button class="btn" onclick="nextSlide()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Atención -->
+        <div class="slide" id="slide4">
+            <div class="header">
+                <h2>Fase 1: Atención</h2>
+            </div>
+            <div class="content">
+                <h3>Objetivo: Captar la atención de dueños y gerentes de PYMES</h3>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Contenido en redes sociales</h4>
+                        <ul>
+                            <li>Publicaciones que destacan problemas comunes</li>
+                            <li>Ej: "¿Cansado de perder horas en gestionar inventarios manualmente?"</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Anuncios pagados segmentados</h4>
+                        <ul>
+                            <li>Segmentación por cargo: "gerente", "dueño de negocio"</li>
+                            <li>Intereses: "gestión empresarial", "automatización"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="prevSlide()">Anterior</button>
+                <button class="btn" onclick="nextSlide()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Interés -->
+        <div class="slide" id="slide5">
+            <div class="header">
+                <h2>Fase 2: Interés</h2>
+            </div>
+            <div class="content">
+                <h3>Objetivo: Generar interés mostrando la solución</h3>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Videos demostrativos</h4>
+                        <ul>
+                            <li>Videos cortos mostrando la plataforma en acción</li>
+                            <li>Ej: "Cómo crear un reporte en 2 minutos"</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Webinars gratuitos</h4>
+                        <ul>
+                            <li>Temas: "Cómo automatizar tu negocio en 3 pasos"</li>
+                            <li>Invitaciones por email y redes sociales</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Contenido educativo</h4>
+                        <ul>
+                            <li>Blog posts sobre beneficios de IA en negocios</li>
+                            <li>Guías: "Cómo reducir costos con un sistema integrado"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="prevSlide()">Anterior</button>
+                <button class="btn" onclick="nextSlide()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Deseo -->
+        <div class="slide" id="slide6">
+            <div class="header">
+                <h2>Fase 3: Deseo</h2>
+            </div>
+            <div class="content">
+                <h3>Objetivo: Convertir el interés en deseo por el producto</h3>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Testimonios de usuarios</h4>
+                        <ul>
+                            <li>Casos reales: "Desde que uso InfoPlanet JP, ahorro 10 horas semanales"</li>
+                            <li>Video testimonios de usuarios satisfechos</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Casos de éxito con datos</h4>
+                        <ul>
+                            <li>Resultados concretos: "+30% de eficiencia en gestión"</li>
+                            <li>Estudios de caso detallados</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Demostraciones personalizadas</h4>
+                        <ul>
+                            <li>Sesiones one-on-one para prospectos calificados</li>
+                            <li>Agendamiento mediante calendario online</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="prevSlide()">Anterior</button>
+                <button class="btn" onclick="nextSlide()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Acción -->
+        <div class="slide" id="slide7">
+            <div class="header">
+                <h2>Fase 4: Acción</h2>
+            </div>
+            <div class="content">
+                <h3>Objetivo: Llevar al usuario a realizar una acción concreta</h3>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Prueba gratuita</h4>
+                        <ul>
+                            <li>Oferta de 14 días de prueba gratuita</li>
+                            <li>Sin requerir tarjeta de crédito inicial</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Call-to-action claros</h4>
+                        <ul>
+                            <li>"¡Comienza tu prueba gratis ahora!"</li>
+                            <li>"Agenda una demostración personalizada"</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Formulario de registro sencillo</h4>
+                        <ul>
+                            <li>Solo información esencial para comenzar</li>
+                            <li>Proceso de onboarding guiado</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="prevSlide()">Anterior</button>
+                <button class="btn" onclick="nextSlide()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Conclusión -->
+        <div class="slide" id="slide8">
+            <div class="header">
+                <h2>Conclusión y Próximos Pasos</h2>
+            </div>
+            <div class="content">
+                <h3>Resumen de la Estrategia</h3>
+                <p>La estrategia AIDA para InfoPlanet JP está diseñada para guiar progresivamente a los dueños de PYMES desde el conocimiento inicial hasta la conversión, destacando los beneficios clave de automatización, IA y accesibilidad.</p>
+                
+                <div class="target-audience">
+                    <h3>Próximos Pasos</h3>
+                    <ul>
+                        <li>Desarrollar contenido para cada fase</li>
+                        <li>Configurar segmentación de anuncios</li>
+                        <li>Crear landing pages específicas</li>
+                        <li>Implementar sistema de seguimiento y analytics</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="prevSlide()">Anterior</button>
+                <button class="btn" onclick="restartPresentation()">Reiniciar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+        
+        function updateProgress() {
+            const progress = document.getElementById('progress');
+            progress.style.width = `${(currentSlide / totalSlides) * 100}%`;
+        }
+        
+        function showSlide(n) {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            document.getElementById(`slide${n}`).classList.add('active');
+            currentSlide = n;
+            updateProgress();
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        function restartPresentation() {
+            showSlide(1);
+        }
+        
+        // Inicializar
+        updateProgress();
+        
+        // Navegación con teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
